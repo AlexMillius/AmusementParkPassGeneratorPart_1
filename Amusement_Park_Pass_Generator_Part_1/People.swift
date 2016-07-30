@@ -161,7 +161,6 @@ struct PeopleInfos {
     let zipCode:String?
     let state:String?
     let socialSecurityNumber:(Int,Int,Int)?
-    let company:String?
     let managementTier:ManagementTier?
     
     //General Init
@@ -174,7 +173,6 @@ struct PeopleInfos {
         self.zipCode = zipCode
         self.state = state
         self.socialSecurityNumber = socialSecurityNumber
-        self.company = company
         self.managementTier = managementTier
     }
     
