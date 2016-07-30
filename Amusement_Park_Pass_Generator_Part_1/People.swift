@@ -39,7 +39,7 @@ protocol GuestVIPType:GuestType {
 }
 
 //MARK: - Type of people
-enum Type {
+enum TypeAccess {
     enum Employee:PeopleType {
         enum Hourly:PeopleType {
             case FoodService
@@ -83,6 +83,16 @@ enum Type {
             }
         }
     }
+}
+
+enum TypesOfPeople {
+    case GuestClassic
+    case GuestVIP
+    case GuestFreeChild
+    case EmployeeFoodService
+    case EmployeeRideService
+    case EmployeeMaintenance
+    case EmployeeManager
 }
 
 //MARK: - Area Access
@@ -181,31 +191,31 @@ struct PeopleInfos {
 
 //MARK: - People object
 struct GuestClassic:GuestClassicType {
-    let access:AreaAccess = Type.Guest.Classic.access
+    let access:AreaAccess = TypeAccess.Guest.Classic.access
 }
 struct GuestVIP:GuestVIPType {
-    let access: AreaAccess = Type.Guest.VIP.access
+    let access: AreaAccess = TypeAccess.Guest.VIP.access
 }
 struct GuestFreeChild:GuestFreeChildType {
-    let access: AreaAccess = Type.Guest.FreeChild.access
+    let access: AreaAccess = TypeAccess.Guest.FreeChild.access
     let dateOfBirth: NSDate
 }
 struct EmployeeFoodService:EmployeeFoodServiceType {
-    let access:AreaAccess = Type.Employee.Hourly.FoodService.access
+    let access:AreaAccess = TypeAccess.Employee.Hourly.FoodService.access
     let info: PeopleInfos
 }
 struct EmployeeRideService:EmployeeRideServiceType {
-    let access: AreaAccess = Type.Employee.Hourly.RideService.access
+    let access: AreaAccess = TypeAccess.Employee.Hourly.RideService.access
     let info: PeopleInfos
 }
 struct EmployeeMaintenance:EmployeeMaintenanceType {
-    let access: AreaAccess = Type.Employee.Hourly.Maintenance.access
+    let access: AreaAccess = TypeAccess.Employee.Hourly.Maintenance.access
     let info: PeopleInfos
 }
 struct Manager:EmployeeManagerType {
-    let access: AreaAccess = Type.Employee.Manager.access
-    let info: PeopleInfos
     let tier: ManagementTier
+    let access: AreaAccess = TypeAccess.Employee.Manager.access
+    let info: PeopleInfos
 }
 
 
