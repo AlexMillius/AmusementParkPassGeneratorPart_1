@@ -38,7 +38,7 @@ protocol GuestFreeChildType:GuestType {
 protocol GuestVIPType:GuestType {
 }
 
-//MARK: - Type
+//MARK: - Type of people
 enum Type {
     enum Employee:PeopleType {
         enum Hourly:PeopleType {
@@ -49,11 +49,11 @@ enum Type {
             var access:AreaAccess {
                 switch self {
                 case .FoodService:
-                    return AreaAccess(maintenance: false, rideControll: false, kitchen: true/*, hourlyEmployeeDummy: nil*/)
+                    return AreaAccess(maintenance: false, rideControll: false, kitchen: true)
                 case .RideService:
-                    return AreaAccess(maintenance: false, rideControll: true, kitchen: false/*, hourlyEmployeeDummy: nil*/)
+                    return AreaAccess(maintenance: false, rideControll: true, kitchen: false)
                 case .Maintenance:
-                    return AreaAccess(maintenance: true, rideControll: true, kitchen: true/*, hourlyEmployeeDummy: nil*/)
+                    return AreaAccess(maintenance: true, rideControll: true, kitchen: true)
                 }
             }
         }
@@ -62,7 +62,7 @@ enum Type {
         var access:AreaAccess {
             switch self {
             case .Manager:
-                return AreaAccess(allAcess: true)
+                return AreaAccess(allAcess: true,skipLines: false)
             }
         }
     }
@@ -73,9 +73,22 @@ enum Type {
         case VIP
         
         var access: AreaAccess {
-            return AreaAccess(allAcess: false)
+            switch self {
+            case .Classic:
+                return AreaAccess(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
+            case .FreeChild:
+                return AreaAccess(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
+            case .VIP:
+                return AreaAccess(skipLines: true, foodDiscountPourcent: 10, merchandiseDiscountPourcent: 20)
+            }
         }
     }
+}
+
+//MARK: - Area Access
+enum discount {
+    case food(Int)
+    case merchandise(Int)
 }
 
 struct AreaAccess {
@@ -85,34 +98,48 @@ struct AreaAccess {
     let rideControll:Bool
     let kitchen:Bool
     let rides:Bool
+    let skipLines:Bool
     let foodDiscountPourcent:Int?
     let merchandiseDiscountPourcent:Int?
     
     //General Init
-    init(amusement:Bool, maintenance:Bool, office:Bool, rideControll:Bool, kitchen:Bool, rides:Bool, foodDiscountPourcent:Int?, merchandiseDiscountPourcent:Int?){
+    init(amusement:Bool, maintenance:Bool, office:Bool, rideControll:Bool, kitchen:Bool, rides:Bool, skipLines:Bool, foodDiscountPourcent:Int?, merchandiseDiscountPourcent:Int?){
         self.amusement = amusement
         self.maintenance = maintenance
         self.office = office
         self.rideControll = rideControll
         self.kitchen = kitchen
         self.rides = rides
+        self.skipLines = skipLines
         self.foodDiscountPourcent = foodDiscountPourcent
         self.merchandiseDiscountPourcent = merchandiseDiscountPourcent
     }
     
     //Hourly employee Init
-    init(amusement:Bool = true, maintenance:Bool, office:Bool = false, rideControll:Bool, kitchen:Bool, rides:Bool = true,foodDiscountPourcent:Int = 15,merchandiseDiscountPourcent:Int = 25/*, hourlyEmployeeDummy:Any?*/){
-    self.init(amusement:amusement,maintenance:maintenance,office:office,rideControll:rideControll,kitchen:kitchen,rides:rides,foodDiscountPourcent:foodDiscountPourcent,merchandiseDiscountPourcent:merchandiseDiscountPourcent)
+    init(maintenance:Bool, rideControll:Bool, kitchen:Bool){
+    self.init(amusement:true,maintenance:maintenance,office:false,rideControll:rideControll,kitchen:kitchen,rides:true,skipLines:false,foodDiscountPourcent:15,merchandiseDiscountPourcent:25)
     }
     
     //Manager employee Init
-    init(allAcess:Bool){
+    init(allAcess:Bool,skipLines:Bool){
         if allAcess {
-            self.init(amusement:true,maintenance:true,office:true,rideControll:true,kitchen:true,rides:true,foodDiscountPourcent:25,merchandiseDiscountPourcent:25)
+            self.init(amusement:true,maintenance:true,office:true,rideControll:true,kitchen:true,rides:true,skipLines:skipLines,foodDiscountPourcent:25,merchandiseDiscountPourcent:25)
         } else {
-            self.init(amusement:false,maintenance:false,office:false,rideControll:false,kitchen:false,rides:false,foodDiscountPourcent:nil,merchandiseDiscountPourcent:nil)
+            self.init(amusement:false,maintenance:false,office:false,rideControll:false,kitchen:false,rides:false,skipLines:skipLines,foodDiscountPourcent:nil,merchandiseDiscountPourcent:nil)
         }
     }
+    
+    //Guest Init
+    init(skipLines:Bool,foodDiscountPourcent:Int?, merchandiseDiscountPourcent:Int?){
+        self.init(amusement:true,maintenance:false,office:false,rideControll:false,kitchen:false,rides:true,skipLines:skipLines,foodDiscountPourcent:foodDiscountPourcent,merchandiseDiscountPourcent:merchandiseDiscountPourcent)
+    }
+}
+
+//MARK: - People Infos
+enum ManagementTier {
+    case General
+    case Senior
+    case Shift
 }
 
 struct PeopleInfo {
@@ -128,7 +155,7 @@ struct PeopleInfo {
     let managementTier:ManagementTier?
     
     //General Init
-    init(firstName:String, lastName:String, dateOfBirth:NSDate, streetAdress:String, city:String, zipCode:String, state:String, socialSecurityNumber:(Int,Int,Int),company:String, managementTier:ManagementTier){
+    init(firstName:String, lastName:String, dateOfBirth:NSDate, streetAdress:String, city:String, zipCode:String, state:String, socialSecurityNumber:(Int,Int,Int),company:String?, managementTier:ManagementTier?){
         self.firstName = firstName
         self.lastName = lastName
         self.dateOfBirth = dateOfBirth
@@ -141,23 +168,15 @@ struct PeopleInfo {
         self.managementTier = managementTier
     }
     
-    
-    
-    //Classic And VIP Guest init
-    init(firstName:String?, lastName:String?, dateOfBirth:NSDate?, streetAdress:String?, city:String?, zipCode:String?, state:String?, socialSecurityNumber:(Int,Int,Int)?,company:String?, managementTier:ManagementTier?){
-        self.init(firstName:nil,lastName: nil,dateOfBirth: nil,streetAdress: nil,city: nil,zipCode: nil,state: nil,socialSecurityNumber: nil,company: nil,managementTier: nil)
-    }
-    
     //Hourly employee init
-    init(firstName:String, lastName:String, dateOfBirth:NSDate, streetAdress:String, city:String, zipCode:String, state:String, socialSecurityNumber:(Int,Int,Int),company:String? = nil, managementTier:ManagementTier? = nil){
-        self.init(firstName:firstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,company: company,managementTier: managementTier)
+    init(firstName:String, lastName:String, dateOfBirth:NSDate, streetAdress:String, city:String, zipCode:String, state:String, socialSecurityNumber:(Int,Int,Int)){
+        self.init(firstName:firstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,company: nil,managementTier: nil)
     }
-}
-
-enum ManagementTier {
-    case General
-    case Senior
-    case Shift
+    
+    //Manager init
+    init(managementTier:ManagementTier, firstName:String, lastName:String, dateOfBirth:NSDate, streetAdress:String, city:String, zipCode:String, state:String, socialSecurityNumber:(Int,Int,Int)){
+        self.init(firstName:firstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,company: nil,managementTier: managementTier)
+    }
 }
 
 struct EmployeeFoodService:EmployeeFoodServiceType {
