@@ -15,7 +15,7 @@ protocol PeopleType {
 
 //MARK: - Employee Protocol
 protocol EmployeeType:PeopleType {
-    var info:PeopleInfo { get }
+    var info:PeopleInfos { get }
 }
 protocol EmployeeFoodServiceType: EmployeeType {
 }
@@ -79,7 +79,7 @@ enum Type {
             case .FreeChild:
                 return AreaAccess(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
             case .VIP:
-                return AreaAccess(skipLines: true, foodDiscountPourcent: 10, merchandiseDiscountPourcent: 20)
+                return AreaAccess(skipLines: true, foodDiscountPourcent: discount.food(10), merchandiseDiscountPourcent: discount.merchandise(20))
             }
         }
     }
@@ -99,11 +99,11 @@ struct AreaAccess {
     let kitchen:Bool
     let rides:Bool
     let skipLines:Bool
-    let foodDiscountPourcent:Int?
-    let merchandiseDiscountPourcent:Int?
+    let foodDiscountPourcent:discount?
+    let merchandiseDiscountPourcent:discount?
     
     //General Init
-    init(amusement:Bool, maintenance:Bool, office:Bool, rideControll:Bool, kitchen:Bool, rides:Bool, skipLines:Bool, foodDiscountPourcent:Int?, merchandiseDiscountPourcent:Int?){
+    init(amusement:Bool, maintenance:Bool, office:Bool, rideControll:Bool, kitchen:Bool, rides:Bool, skipLines:Bool, foodDiscountPourcent:discount?, merchandiseDiscountPourcent:discount?){
         self.amusement = amusement
         self.maintenance = maintenance
         self.office = office
@@ -117,20 +117,20 @@ struct AreaAccess {
     
     //Hourly employee Init
     init(maintenance:Bool, rideControll:Bool, kitchen:Bool){
-    self.init(amusement:true,maintenance:maintenance,office:false,rideControll:rideControll,kitchen:kitchen,rides:true,skipLines:false,foodDiscountPourcent:15,merchandiseDiscountPourcent:25)
+    self.init(amusement:true,maintenance:maintenance,office:false,rideControll:rideControll,kitchen:kitchen,rides:true,skipLines:false,foodDiscountPourcent:discount.food(15),merchandiseDiscountPourcent:discount.merchandise(25))
     }
     
     //Manager employee Init
     init(allAcess:Bool,skipLines:Bool){
         if allAcess {
-            self.init(amusement:true,maintenance:true,office:true,rideControll:true,kitchen:true,rides:true,skipLines:skipLines,foodDiscountPourcent:25,merchandiseDiscountPourcent:25)
+            self.init(amusement:true,maintenance:true,office:true,rideControll:true,kitchen:true,rides:true,skipLines:skipLines,foodDiscountPourcent:discount.food(25),merchandiseDiscountPourcent:discount.merchandise(25))
         } else {
             self.init(amusement:false,maintenance:false,office:false,rideControll:false,kitchen:false,rides:false,skipLines:skipLines,foodDiscountPourcent:nil,merchandiseDiscountPourcent:nil)
         }
     }
     
     //Guest Init
-    init(skipLines:Bool,foodDiscountPourcent:Int?, merchandiseDiscountPourcent:Int?){
+    init(skipLines:Bool,foodDiscountPourcent:discount?, merchandiseDiscountPourcent:discount?){
         self.init(amusement:true,maintenance:false,office:false,rideControll:false,kitchen:false,rides:true,skipLines:skipLines,foodDiscountPourcent:foodDiscountPourcent,merchandiseDiscountPourcent:merchandiseDiscountPourcent)
     }
 }
@@ -142,7 +142,7 @@ enum ManagementTier {
     case Shift
 }
 
-struct PeopleInfo {
+struct PeopleInfos {
     let firstName:String?
     let lastName:String?
     let dateOfBirth:NSDate?
@@ -179,9 +179,33 @@ struct PeopleInfo {
     }
 }
 
+//MARK: - People object
+struct GuestClassic:GuestClassicType {
+    let access:AreaAccess = Type.Guest.Classic.access
+}
+struct GuestVIP:GuestVIPType {
+    let access: AreaAccess = Type.Guest.VIP.access
+}
+struct GuestFreeChild:GuestFreeChildType {
+    let access: AreaAccess = Type.Guest.FreeChild.access
+    let dateOfBirth: NSDate
+}
 struct EmployeeFoodService:EmployeeFoodServiceType {
     let access:AreaAccess = Type.Employee.Hourly.FoodService.access
-    let info: PeopleInfo
+    let info: PeopleInfos
+}
+struct EmployeeRideService:EmployeeRideServiceType {
+    let access: AreaAccess = Type.Employee.Hourly.RideService.access
+    let info: PeopleInfos
+}
+struct EmployeeMaintenance:EmployeeMaintenanceType {
+    let access: AreaAccess = Type.Employee.Hourly.Maintenance.access
+    let info: PeopleInfos
+}
+struct Manager:EmployeeManagerType {
+    let access: AreaAccess = Type.Employee.Manager.access
+    let info: PeopleInfos
+    let tier: ManagementTier
 }
 
 
