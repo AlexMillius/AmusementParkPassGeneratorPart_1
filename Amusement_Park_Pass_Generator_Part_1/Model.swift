@@ -9,28 +9,38 @@
 import Foundation
 
 enum ErrorMissingInfo:ErrorType {
-    case FirstNameMissing(String)
-    case LastNameMissing(String)
-    case DateOfBirthMissing(String)
-    case StreetAdressMissing(String)
-    case CityMissing(String)
-    case ZipCodeMissing(String)
-    case StateMissing(String)
-    case SocialSecurityNumberMissing(String)
-    case ManagementTierMissing(String)
+    case FirstNameMissing(String)//ok
+    case LastNameMissing(String)//ok
+    case DateOfBirthMissing(String)//ok
+    case StreetAdressMissing(String)//ok
+    case CityMissing(String)//ok
+    case ZipCodeMissing(String)//ok
+    case StateMissing(String)//ok
+    case SocialSecurityNumberMissing(String)//ok
+    case ManagementTierMissing(String)//ok
 }
 
 enum Error:ErrorType {
-    case UnknownType(String)
-    case UnableToCreatePeople
-    case InvalidDateFormat
-    case PeopleTooOldForFree
+    case UnknownType(String)//Should never appen
+    case UnableToCreatePeople//ok
+    case InvalidDateFormat//ok
+    case PeopleTooOldForFree//ok
 }
 
 let dateFormatter = NSDateFormatter()
 let calendar = NSCalendar.currentCalendar()
 
-func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirth:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier?) throws -> PeopleType {
+func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirth:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier) throws -> PeopleType {
+    
+    func checkDateFormat(date :String) throws -> NSDate{
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let birthday = dateFormatter.dateFromString(date)
+        if let birthdayUnwrapped = birthday {
+            return birthdayUnwrapped
+        } else {
+            throw Error.InvalidDateFormat
+        }
+    }
     
     switch type {
     case .GuestClassic:
@@ -43,11 +53,7 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
         }
         
         //Check if the date can be converted in this format
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        let birthday = dateFormatter.dateFromString(dateOfBirth)
-        guard let birthdayUnwrapped = birthday else {
-            throw Error.InvalidDateFormat
-        }
+        let birthdayUnwrapped = try checkDateFormat(dateOfBirth)
         
         //Check if the people is youg enough
         let age = calendar.components(.Year, fromDate: birthdayUnwrapped,toDate: NSDate(),options: []).year
@@ -65,7 +71,9 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
         guard let lastName = lastName else {
             throw ErrorMissingInfo.LastNameMissing("last name")
         }
-        guard let dateOfBirth = dateOfBirth else {
+        if let date = dateOfBirth {
+            try checkDateFormat(date)
+        }else {
             throw ErrorMissingInfo.DateOfBirthMissing("date of birth")
         }
         guard let streetAdress = streetAdress else {
@@ -87,16 +95,16 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
         // ReCheck for the type to dyspatch init correctly
         switch type {
         case .EmployeeFoodService:
-            return EmployeeFoodService(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return EmployeeFoodService(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber, managementTier: managementTier))
         case .EmployeeRideService:
-            return EmployeeRideService(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return EmployeeRideService(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         case .EmployeeMaintenance:
-            return EmployeeMaintenance(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return EmployeeMaintenance(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         case .EmployeeManager:
-            guard let managementTier = managementTier else {
+            if managementTier == ManagementTier.None {
                 throw ErrorMissingInfo.ManagementTierMissing("management tier")
             }
-            return Manager(tier: managementTier, info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return Manager(tier: managementTier, info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         default: throw Error.UnknownType("Unknown type of people")
         }
     }

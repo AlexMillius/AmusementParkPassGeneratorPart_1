@@ -150,6 +150,7 @@ enum ManagementTier {
     case General
     case Senior
     case Shift
+    case None
 }
 
 struct PeopleInfos {
@@ -161,10 +162,10 @@ struct PeopleInfos {
     let zipCode:Int?
     let state:String?
     let socialSecurityNumber:(Int,Int,Int)?
-    let managementTier:ManagementTier?
+    let managementTier:ManagementTier
     
     //General Init
-    init(firstName:String?, lastName:String?, dateOfBirth:String?, streetAdress:String?, city:String?, zipCode:Int?, state:String?, socialSecurityNumber:(Int,Int,Int)?, managementTier:ManagementTier?){
+    init(firstName:String?, lastName:String?, dateOfBirth:String?, streetAdress:String?, city:String?, zipCode:Int?, state:String?, socialSecurityNumber:(Int,Int,Int)?, managementTier:ManagementTier){
         self.firstName = firstName
         self.lastName = lastName
         self.dateOfBirth = dateOfBirth
@@ -176,18 +177,31 @@ struct PeopleInfos {
         self.managementTier = managementTier
     }
     
+    //Empty Init
+    init(){
+        self.firstName = nil
+        self.lastName = nil
+        self.dateOfBirth = nil
+        self.streetAdress = nil
+        self.city = nil
+        self.zipCode = nil
+        self.state = nil
+        self.socialSecurityNumber = nil
+        self.managementTier = .None
+    }
+    
     //Free Child init
     init(birthday:String){
-        self.init(firstName:nil,lastName: nil,dateOfBirth: birthday, streetAdress: nil,city: nil,zipCode: nil,state: nil,socialSecurityNumber: nil,managementTier: nil)
+        self.init(firstName:nil,lastName: nil,dateOfBirth: birthday, streetAdress: nil,city: nil,zipCode: nil,state: nil,socialSecurityNumber: nil,managementTier: .None)
     }
     
     //Hourly employee init
-    init(firstName:String, lastName:String, dateOfBirth:String, streetAdress:String, city:String, zipCode:Int, state:String, socialSecurityNumber:(Int,Int,Int)){
-        self.init(firstName:firstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,managementTier: nil)
+    init(employeeFirstName:String?, lastName:String?, dateOfBirth:String?, streetAdress:String?, city:String?, zipCode:Int?, state:String?, socialSecurityNumber:(Int,Int,Int)?){
+        self.init(firstName:employeeFirstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,managementTier: .None)
     }
     
     //Manager init
-    init(managementTier:ManagementTier, firstName:String, lastName:String, dateOfBirth:String, streetAdress:String, city:String, zipCode:Int, state:String, socialSecurityNumber:(Int,Int,Int)){
+    init(managementTier:ManagementTier, firstName:String?, lastName:String?, dateOfBirth:String?, streetAdress:String?, city:String?, zipCode:Int?, state:String?, socialSecurityNumber:(Int,Int,Int)?){
         self.init(firstName:firstName,lastName: lastName,dateOfBirth: dateOfBirth,streetAdress: streetAdress,city: city,zipCode: zipCode,state: state,socialSecurityNumber: socialSecurityNumber,managementTier: managementTier)
     }
 }
