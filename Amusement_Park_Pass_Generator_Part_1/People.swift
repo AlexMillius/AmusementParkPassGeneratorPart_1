@@ -10,7 +10,7 @@ import Foundation
 
 //MARK: Protocol
 protocol PeopleType {
-    var access:AreaAccess { get }
+    var access:Access { get }
 }
 
 //MARK: - Employee Protocol
@@ -46,23 +46,23 @@ enum TypeAccess {
             case RideService
             case Maintenance
             
-            var access:AreaAccess {
+            var access:Access {
                 switch self {
                 case .FoodService:
-                    return AreaAccess(maintenance: false, rideControll: false, kitchen: true)
+                    return Access(maintenance: false, rideControll: false, kitchen: true)
                 case .RideService:
-                    return AreaAccess(maintenance: false, rideControll: true, kitchen: false)
+                    return Access(maintenance: false, rideControll: true, kitchen: false)
                 case .Maintenance:
-                    return AreaAccess(maintenance: true, rideControll: true, kitchen: true)
+                    return Access(maintenance: true, rideControll: true, kitchen: true)
                 }
             }
         }
         case Manager
         
-        var access:AreaAccess {
+        var access:Access {
             switch self {
             case .Manager:
-                return AreaAccess(allAcess: true,skipLines: false)
+                return Access(allAcess: true,skipLines: false)
             }
         }
     }
@@ -72,14 +72,14 @@ enum TypeAccess {
         case FreeChild
         case VIP
         
-        var access: AreaAccess {
+        var access: Access {
             switch self {
             case .Classic:
-                return AreaAccess(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
+                return Access(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
             case .FreeChild:
-                return AreaAccess(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
+                return Access(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
             case .VIP:
-                return AreaAccess(skipLines: true, foodDiscountPourcent: discount.food(10), merchandiseDiscountPourcent: discount.merchandise(20))
+                return Access(skipLines: true, foodDiscountPourcent: discount.food(10), merchandiseDiscountPourcent: discount.merchandise(20))
             }
         }
     }
@@ -101,7 +101,19 @@ enum discount {
     case merchandise(Int)
 }
 
-struct AreaAccess {
+enum Area {
+    case amusement
+    case maintenance
+    case office
+    case rideControll
+    case kitchen
+    case rides
+    case skipLines
+    case foodDiscount
+    case merchandiseDiscount
+}
+
+struct Access {
     let amusement:Bool
     let maintenance:Bool
     let office:Bool
@@ -208,30 +220,30 @@ struct PeopleInfos {
 
 //MARK: - People object
 struct GuestClassic:GuestClassicType {
-    let access:AreaAccess = TypeAccess.Guest.Classic.access
+    let access:Access = TypeAccess.Guest.Classic.access
 }
 struct GuestVIP:GuestVIPType {
-    let access: AreaAccess = TypeAccess.Guest.VIP.access
+    let access: Access = TypeAccess.Guest.VIP.access
 }
 struct GuestFreeChild:GuestFreeChildType {
-    let access: AreaAccess = TypeAccess.Guest.FreeChild.access
+    let access: Access = TypeAccess.Guest.FreeChild.access
     let dateOfBirth: NSDate
 }
 struct EmployeeFoodService:EmployeeFoodServiceType {
-    let access:AreaAccess = TypeAccess.Employee.Hourly.FoodService.access
+    let access:Access = TypeAccess.Employee.Hourly.FoodService.access
     let info: PeopleInfos
 }
 struct EmployeeRideService:EmployeeRideServiceType {
-    let access: AreaAccess = TypeAccess.Employee.Hourly.RideService.access
+    let access: Access = TypeAccess.Employee.Hourly.RideService.access
     let info: PeopleInfos
 }
 struct EmployeeMaintenance:EmployeeMaintenanceType {
-    let access: AreaAccess = TypeAccess.Employee.Hourly.Maintenance.access
+    let access: Access = TypeAccess.Employee.Hourly.Maintenance.access
     let info: PeopleInfos
 }
 struct Manager:EmployeeManagerType {
     let tier: ManagementTier
-    let access: AreaAccess = TypeAccess.Employee.Manager.access
+    let access: Access = TypeAccess.Employee.Manager.access
     let info: PeopleInfos
 }
 
