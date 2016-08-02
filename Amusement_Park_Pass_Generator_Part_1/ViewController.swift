@@ -22,24 +22,24 @@ class ViewController: UIViewController {
         laodAllSounds()
         
         do {
-            let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
+            //let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
             //vipGuest = try createPass(type: .GuestVIP, infos: PeopleInfos()); people = vipGuest
-            //freeChildGuest = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "22.01.2014"));people = freeChildGuest
-            //foodServiceEmployee = try createPass(type: .EmployeeFoodService, infos: PeopleInfos(employeeFirstName: "Armando", lastName: "Qeshua", dateOfBirth: "22.01.2000", streetAdress: "Route de Chiza", city: "Bengladou", zipCode: 1954, state: "NY", socialSecurityNumber: (12, 134, 1245)))
-            //rideServiceEmployee = try createPass(type: .EmployeeRideService, infos: PeopleInfos(employeeFirstName: "Bob", lastName: "Smith", dateOfBirth: "22.04.87", streetAdress: "love street", city: "Bourgogne", zipCode: 1456, state: "Ohio", socialSecurityNumber: (123, 45, 678)))
-            //maintenanceEmployee = try createPass(type: .EmployeeMaintenance, infos: PeopleInfos(employeeFirstName: "Charly", lastName: "Jacquot" , dateOfBirth: "30.11.1983", streetAdress: "Rue du babouin", city: "Berne", zipCode: 2489, state: "Michigan", socialSecurityNumber: (123, 432, 67)))
-            //manager = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //freeChildGuestTooYoung = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "22.01.2000"))
-            //managerFirstNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: nil, lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerLastNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: nil, dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerBirthdayError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: nil, streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerStreetAdressError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: nil, city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerCityError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: nil, zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerZipCodeError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: nil, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerStateError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: nil, socialSecurityNumber: (34, 567, 2345)))
-            //managerSocialSecurityError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: nil))
-            //managerTierError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .None, firstName: "Marc", lastName: "Antille", dateOfBirth: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
-            //managerDateFormatError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirth: "555.44403.441975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345)))
+            //let freeChildGuest = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "02.09.2014"));people = freeChildGuest
+            //let foodServiceEmployee = try createPass(type: .EmployeeFoodService, infos: PeopleInfos(employeeFirstName: "Armando", lastName: "Qeshua", dateOfBirthString: "22.01.2000", streetAdress: "Route de Chiza", city: "Bengladou", zipCode: 1954, state: "NY", socialSecurityNumber: (12, 134, 1245))); people = foodServiceEmployee
+            //let rideServiceEmployee = try createPass(type: .EmployeeRideService, infos: PeopleInfos(employeeFirstName: "Bob", lastName: "Smith", dateOfBirthString: "22.04.87", streetAdress: "love street", city: "Bourgogne", zipCode: 1456, state: "Ohio", socialSecurityNumber: (123, 45, 678))); people = rideServiceEmployee
+            //let maintenanceEmployee = try createPass(type: .EmployeeMaintenance, infos: PeopleInfos(employeeFirstName: "Charly", lastName: "Jacquot" , dateOfBirthString: "30.11.1983", streetAdress: "Rue du babouin", city: "Berne", zipCode: 2489, state: "Michigan", socialSecurityNumber: (123, 432, 67))); people = maintenanceEmployee
+            //let manager = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "02.08.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = manager
+            //let freeChildGuestTooYoung = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "22.01.2000")); people = freeChildGuestTooYoung
+            //let managerFirstNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: nil, lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerFirstNAmeError
+            //let managerLastNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: nil, dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerLastNameError
+            //let managerBirthdayError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: nil, streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerBirthdayError
+            //let managerStreetAdressError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: nil, city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerStreetAdressError
+            //let managerCityError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: nil, zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerCityError
+            //let managerZipCodeError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: nil, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerZipCodeError
+            //let managerStateError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: nil, socialSecurityNumber: (34, 567, 2345))); people = managerStateError
+            //let managerSocialSecurityError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: nil)); people = managerSocialSecurtityError
+            //let managerTierError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .None, firstName: "Marc", lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerTierError
+            //let managerDateFormatError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "555.44403.441975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerDateFormatError
         } catch Error.UnableToCreatePeople {
             print("Unable to create People")
         } catch Error.UnknownType(let error) {
@@ -51,6 +51,9 @@ class ViewController: UIViewController {
         
         if let people = people {
             if AmusementParkArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
+            if AmusementParkArea.checkIfAccessGranted(people).birthDay {
+                print("Happy Birthday!")
+            }
             //if RidesArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if RidesControllArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if SkipLineArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
@@ -73,7 +76,7 @@ class ViewController: UIViewController {
         var people:PeopleType?
         
         do {
-            people = try createNewPeople(type: type, firstName: infos.firstName, lastName: infos.lastName, dateOfBirth: infos.dateOfBirth, streetAdress: infos.streetAdress, city: infos.city, zipCode: infos.zipCode, state: infos.state, socialSecurityNumber: infos.socialSecurityNumber, managementTier: infos.managementTier)
+            people = try createNewPeople(type: type, firstName: infos.firstName, lastName: infos.lastName, dateOfBirthString: infos.dateOfBirthString, streetAdress: infos.streetAdress, city: infos.city, zipCode: infos.zipCode, state: infos.state, socialSecurityNumber: infos.socialSecurityNumber, managementTier: infos.managementTier)
         } catch ErrorMissingInfo.FirstNameMissing(let error){
             print("Please enter a \(error)")
         } catch ErrorMissingInfo.LastNameMissing(let error){

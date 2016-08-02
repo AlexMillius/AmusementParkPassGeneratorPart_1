@@ -30,7 +30,15 @@ enum Error:ErrorType {
 let dateFormatter = NSDateFormatter()
 let calendar = NSCalendar.currentCalendar()
 
-func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirth:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier) throws -> PeopleType {
+func checkIfThisIsTheBirthday(birthdayDate:NSDate) -> Bool{
+    let currentComponents = calendar.components([.Day , .Month ], fromDate: NSDate())
+    let birthDayComponents = calendar.components([.Day , .Month ], fromDate: birthdayDate)
+    if currentComponents.month == birthDayComponents.month && currentComponents.day == birthDayComponents.day {
+        return true
+    } else {return false}
+}
+
+func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirthString:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier) throws -> PeopleType {
     
     func checkDateFormat(date :String) throws -> NSDate{
         dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -48,7 +56,7 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
     case .GuestVIP:
         return GuestVIP()
     case .GuestFreeChild:
-        guard let dateOfBirth = dateOfBirth else {
+        guard let dateOfBirth = dateOfBirthString else {
             throw ErrorMissingInfo.DateOfBirthMissing("date of birth")
         }
         
@@ -71,7 +79,7 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
         guard let lastName = lastName else {
             throw ErrorMissingInfo.LastNameMissing("last name")
         }
-        if let date = dateOfBirth {
+        if let date = dateOfBirthString {
             try checkDateFormat(date)
         }else {
             throw ErrorMissingInfo.DateOfBirthMissing("date of birth")
@@ -95,16 +103,16 @@ func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String
         // ReCheck for the type to dyspatch init correctly
         switch type {
         case .EmployeeFoodService:
-            return EmployeeFoodService(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber, managementTier: managementTier))
+            return EmployeeFoodService(info: PeopleInfos(firstName: firstName, lastName: lastName, dateOfBirthString: dateOfBirthString, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber, managementTier: managementTier))
         case .EmployeeRideService:
-            return EmployeeRideService(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return EmployeeRideService(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirthString: dateOfBirthString, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         case .EmployeeMaintenance:
-            return EmployeeMaintenance(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return EmployeeMaintenance(info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirthString: dateOfBirthString, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         case .EmployeeManager:
             if managementTier == ManagementTier.None {
                 throw ErrorMissingInfo.ManagementTierMissing("management tier")
             }
-            return Manager(tier: managementTier, info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
+            return Manager(tier: managementTier, info: PeopleInfos(employeeFirstName: firstName, lastName: lastName, dateOfBirthString: dateOfBirthString, streetAdress: streetAdress, city: city, zipCode: zipCode, state: state, socialSecurityNumber: socialSecurityNumber))
         default: throw Error.UnknownType("Unknown type of people")
         }
     }
