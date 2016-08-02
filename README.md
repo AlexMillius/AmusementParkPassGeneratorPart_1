@@ -1,5 +1,5 @@
 # AmusementParkPassGenerator-Part1
-Treehouse iOS Techdegree Project #4
+Treehouse iOS Techdegree Project #4 Text Formated by bonuelc
 
 For this project, you are being asked to create a system for creating and validating access passes to an amusement park. Broadly speaking, there are three types of people who can be granted access to the park: employees, vendors and of course, guests. As you can imagine, these different groups are entitled to enter different areas of the park and may or not be permitted to do certain things, like: ride the rides or receive discounts in certain eateries and shops. In addition, within the category of employees, there are several types with varying access. Similarly, guests can either be “classic”, “vip”, or “free child”, and have differing privileges. Details on exactly what each type of entrant is permitted to do and what type of personal information is required from each, are spelled out in the Business Rules Matrix, linked in Project Resources.
 
