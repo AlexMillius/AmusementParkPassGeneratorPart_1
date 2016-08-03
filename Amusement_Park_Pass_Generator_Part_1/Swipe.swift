@@ -23,7 +23,7 @@ extension AccessControlType {
                 if people is EmployeeType {
                     let employee = people as! EmployeeType
                     if let birthday = employee.info.dateOfBirth {
-                        if checkIfThisIsTheBirthday(birthday) {
+                        if birthday.todayIsBirthday {
                             return (true,nil,true)
                         } else {
                             return (true,nil,false)
@@ -32,7 +32,7 @@ extension AccessControlType {
                 }
                 if people is GuestFreeChild {
                     let freeChild = people as! GuestFreeChild
-                    if checkIfThisIsTheBirthday(freeChild.dateOfBirth) {
+                    if freeChild.dateOfBirth.todayIsBirthday {
                         return (true,nil,true)
                     } else {
                         return (true,nil,false)

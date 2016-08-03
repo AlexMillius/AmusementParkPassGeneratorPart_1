@@ -22,13 +22,13 @@ class ViewController: UIViewController {
         laodAllSounds()
         
         do {
-            let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
+            //let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
             //vipGuest = try createPass(type: .GuestVIP, infos: PeopleInfos()); people = vipGuest
-            //let freeChildGuest = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "02.09.2014"));people = freeChildGuest
+            //let freeChildGuest = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "03.08.2014"));people = freeChildGuest
             //let foodServiceEmployee = try createPass(type: .EmployeeFoodService, infos: PeopleInfos(employeeFirstName: "Armando", lastName: "Qeshua", dateOfBirthString: "22.01.2000", streetAdress: "Route de Chiza", city: "Bengladou", zipCode: 1954, state: "NY", socialSecurityNumber: (12, 134, 1245))); people = foodServiceEmployee
             //let rideServiceEmployee = try createPass(type: .EmployeeRideService, infos: PeopleInfos(employeeFirstName: "Bob", lastName: "Smith", dateOfBirthString: "22.04.87", streetAdress: "love street", city: "Bourgogne", zipCode: 1456, state: "Ohio", socialSecurityNumber: (123, 45, 678))); people = rideServiceEmployee
             //let maintenanceEmployee = try createPass(type: .EmployeeMaintenance, infos: PeopleInfos(employeeFirstName: "Charly", lastName: "Jacquot" , dateOfBirthString: "30.11.1983", streetAdress: "Rue du babouin", city: "Berne", zipCode: 2489, state: "Michigan", socialSecurityNumber: (123, 432, 67))); people = maintenanceEmployee
-            //let manager = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "02.08.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = manager
+            //let manager = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: "Antille", dateOfBirthString: "03.08.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = manager
             //let freeChildGuestTooYoung = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "22.01.2000")); people = freeChildGuestTooYoung
             //let managerFirstNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: nil, lastName: "Antille", dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerFirstNAmeError
             //let managerLastNameError = try createPass(type: .EmployeeManager, infos: PeopleInfos(managementTier: .General, firstName: "Marc", lastName: nil, dateOfBirthString: "05.03.1975", streetAdress: "Boss's Street", city: "Manuver", zipCode: 2348, state: "Nevada", socialSecurityNumber: (34, 567, 2345))); people = managerLastNameError
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         
         if let people = people {
             if AmusementParkArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
-            //if AmusementParkArea.checkIfAccessGranted(people).birthDay {print("Happy Birthday!")}
+            if AmusementParkArea.checkIfAccessGranted(people).birthDay {print("Happy Birthday!")}
             //if RidesArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if RidesControllArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if SkipLineArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}

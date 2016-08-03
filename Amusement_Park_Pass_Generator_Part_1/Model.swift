@@ -28,7 +28,16 @@ enum Error:ErrorType {
     case PeopleTooOldForFree//ok
 }
 
-//MARK: - date Helper
+//MARK: - NSDate extension
+extension NSDate {
+    var todayIsBirthday:Bool {
+        let currentComponents = calendar.components([.Day , .Month ], fromDate: NSDate())
+        let birthDayComponents = calendar.components([.Day , .Month ], fromDate: self)
+        if currentComponents.month == birthDayComponents.month && currentComponents.day == birthDayComponents.day {
+            return true
+        } else {return false}
+    }
+}
 let dateFormatter = NSDateFormatter()
 let calendar = NSCalendar.currentCalendar()
 
