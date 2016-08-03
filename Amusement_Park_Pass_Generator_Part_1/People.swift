@@ -103,7 +103,7 @@ enum ManagementTier {
     case None
 }
 
-struct PeopleInfos { //TODO: faire des protocol pour le nom, l'adresse, le management
+struct PeopleInfos {
     let firstName:String?
     let lastName:String?
     let dateOfBirthString:String?

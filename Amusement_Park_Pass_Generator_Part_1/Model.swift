@@ -41,14 +41,6 @@ extension NSDate {
 let dateFormatter = NSDateFormatter()
 let calendar = NSCalendar.currentCalendar()
 
-func checkIfThisIsTheBirthday(birthdayDate:NSDate) -> Bool{
-    let currentComponents = calendar.components([.Day , .Month ], fromDate: NSDate())
-    let birthDayComponents = calendar.components([.Day , .Month ], fromDate: birthdayDate)
-    if currentComponents.month == birthDayComponents.month && currentComponents.day == birthDayComponents.day {
-        return true
-    } else {return false}
-}
-
 //MARK: - create people
 func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirthString:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier) throws -> PeopleType {
     
