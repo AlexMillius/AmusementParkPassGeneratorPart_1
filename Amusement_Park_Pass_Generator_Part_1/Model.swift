@@ -28,7 +28,7 @@ enum Error:ErrorType {
     case PeopleTooOldForFree//ok
 }
 
-//MARK: - NSDate extension
+//MARK: - NSDate extension 
 extension NSDate {
     var todayIsBirthday:Bool {
         let currentComponents = calendar.components([.Day , .Month ], fromDate: NSDate())
