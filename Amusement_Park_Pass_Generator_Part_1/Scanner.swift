@@ -98,9 +98,3 @@ struct FoodDiscountCheck:AccessControlType {
 struct MerchandiseDiscountCheck:AccessControlType {
     static let area: Area = Area.merchandiseDiscount
 }
-
-
-
-
-
-

@@ -16,7 +16,8 @@
 		D998ADA31D4B97E500678A97 /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = D998ADA11D4B97E500678A97 /* AccessDenied.wav */; };
 		D998ADA41D4B97E500678A97 /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = D998ADA21D4B97E500678A97 /* AccessGranted.wav */; };
 		D998ADA81D4B991100678A97 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = D998ADA71D4B991100678A97 /* People.swift */; };
-		D9A8B2721D5113FF002A8FEF /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A8B2711D5113FF002A8FEF /* Swipe.swift */; };
+		D9A1E4BC1D516D740092F3AD /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A1E4BB1D516D740092F3AD /* Access.swift */; };
+		D9A8B2721D5113FF002A8FEF /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A8B2711D5113FF002A8FEF /* Scanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +32,8 @@
 		D998ADA11D4B97E500678A97 /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessDenied.wav; sourceTree = "<group>"; };
 		D998ADA21D4B97E500678A97 /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessGranted.wav; sourceTree = "<group>"; };
 		D998ADA71D4B991100678A97 /* People.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
-		D9A8B2711D5113FF002A8FEF /* Swipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
+		D9A1E4BB1D516D740092F3AD /* Access.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
+		D9A8B2711D5113FF002A8FEF /* Scanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +69,9 @@
 				D998AD8F1D4B972600678A97 /* AppDelegate.swift */,
 				D998AD911D4B972600678A97 /* ViewController.swift */,
 				D907CC521D4D2CD20096A61E /* Model.swift */,
-				D9A8B2711D5113FF002A8FEF /* Swipe.swift */,
+				D9A8B2711D5113FF002A8FEF /* Scanner.swift */,
 				D998ADA71D4B991100678A97 /* People.swift */,
+				D9A1E4BB1D516D740092F3AD /* Access.swift */,
 				D998AD931D4B972600678A97 /* Main.storyboard */,
 				D998AD981D4B972600678A97 /* LaunchScreen.storyboard */,
 				D998AD9B1D4B972600678A97 /* Info.plist */,
@@ -170,8 +173,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D998AD921D4B972600678A97 /* ViewController.swift in Sources */,
+				D9A1E4BC1D516D740092F3AD /* Access.swift in Sources */,
 				D998ADA81D4B991100678A97 /* People.swift in Sources */,
-				D9A8B2721D5113FF002A8FEF /* Swipe.swift in Sources */,
+				D9A8B2721D5113FF002A8FEF /* Scanner.swift in Sources */,
 				D998AD901D4B972600678A97 /* AppDelegate.swift in Sources */,
 				D907CC531D4D2CD20096A61E /* Model.swift in Sources */,
 			);

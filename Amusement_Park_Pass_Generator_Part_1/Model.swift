@@ -8,6 +8,7 @@
 
 import Foundation
 
+//MARK: - Error
 enum ErrorMissingInfo:ErrorType {
     case FirstNameMissing(String)//ok
     case LastNameMissing(String)//ok
@@ -27,6 +28,7 @@ enum Error:ErrorType {
     case PeopleTooOldForFree//ok
 }
 
+//MARK: - date Helper
 let dateFormatter = NSDateFormatter()
 let calendar = NSCalendar.currentCalendar()
 
@@ -38,6 +40,7 @@ func checkIfThisIsTheBirthday(birthdayDate:NSDate) -> Bool{
     } else {return false}
 }
 
+//MARK: - create people
 func createNewPeople(type type:TypesOfPeople, firstName:String?, lastName:String?, dateOfBirthString:String?,streetAdress:String?,city:String?,zipCode:Int?,state:String?,socialSecurityNumber:(Int,Int,Int)?,managementTier:ManagementTier) throws -> PeopleType {
     
     func checkDateFormat(date :String) throws -> NSDate{

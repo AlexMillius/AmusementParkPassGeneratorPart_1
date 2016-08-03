@@ -38,7 +38,7 @@ protocol GuestFreeChildType:GuestType {
 protocol GuestVIPType:GuestType {
 }
 
-//MARK: - Type of people
+//MARK: - Type of access
 enum TypeAccess {
     enum Employee:PeopleType {
         enum Hourly:PeopleType {
@@ -79,7 +79,7 @@ enum TypeAccess {
             case .FreeChild:
                 return Access(skipLines: false, foodDiscountPourcent: nil, merchandiseDiscountPourcent: nil)
             case .VIP:
-                return Access(skipLines: true, foodDiscountPourcent: discount.food(10), merchandiseDiscountPourcent: discount.merchandise(20))
+                return Access(skipLines: true, foodDiscountPourcent: Discount.food(10), merchandiseDiscountPourcent: Discount.merchandise(20))
             }
         }
     }
@@ -95,68 +95,6 @@ enum TypesOfPeople {
     case EmployeeManager
 }
 
-//MARK: - Area Access
-enum discount {
-    case food(Int)
-    case merchandise(Int)
-}
-
-enum Area {
-    case amusement
-    case maintenance
-    case office
-    case rideControll
-    case kitchen
-    case rides
-    case skipLines
-    case foodDiscount
-    case merchandiseDiscount
-}
-
-struct Access {
-    let amusement:Bool
-    let maintenance:Bool
-    let office:Bool
-    let rideControll:Bool
-    let kitchen:Bool
-    let rides:Bool
-    let skipLines:Bool
-    let foodDiscountPourcent:discount?
-    let merchandiseDiscountPourcent:discount?
-    
-    //General Init
-    init(amusement:Bool, maintenance:Bool, office:Bool, rideControll:Bool, kitchen:Bool, rides:Bool, skipLines:Bool, foodDiscountPourcent:discount?, merchandiseDiscountPourcent:discount?){
-        self.amusement = amusement
-        self.maintenance = maintenance
-        self.office = office
-        self.rideControll = rideControll
-        self.kitchen = kitchen
-        self.rides = rides
-        self.skipLines = skipLines
-        self.foodDiscountPourcent = foodDiscountPourcent
-        self.merchandiseDiscountPourcent = merchandiseDiscountPourcent
-    }
-    
-    //Hourly employee Init
-    init(maintenance:Bool, rideControll:Bool, kitchen:Bool){
-    self.init(amusement:true,maintenance:maintenance,office:false,rideControll:rideControll,kitchen:kitchen,rides:true,skipLines:false,foodDiscountPourcent:discount.food(15),merchandiseDiscountPourcent:discount.merchandise(25))
-    }
-    
-    //Manager employee Init
-    init(allAcess:Bool,skipLines:Bool){
-        if allAcess {
-            self.init(amusement:true,maintenance:true,office:true,rideControll:true,kitchen:true,rides:true,skipLines:skipLines,foodDiscountPourcent:discount.food(25),merchandiseDiscountPourcent:discount.merchandise(25))
-        } else {
-            self.init(amusement:false,maintenance:false,office:false,rideControll:false,kitchen:false,rides:false,skipLines:skipLines,foodDiscountPourcent:nil,merchandiseDiscountPourcent:nil)
-        }
-    }
-    
-    //Guest Init
-    init(skipLines:Bool,foodDiscountPourcent:discount?, merchandiseDiscountPourcent:discount?){
-        self.init(amusement:true,maintenance:false,office:false,rideControll:false,kitchen:false,rides:true,skipLines:skipLines,foodDiscountPourcent:foodDiscountPourcent,merchandiseDiscountPourcent:merchandiseDiscountPourcent)
-    }
-}
-
 //MARK: - People Infos
 enum ManagementTier {
     case General
@@ -165,7 +103,7 @@ enum ManagementTier {
     case None
 }
 
-struct PeopleInfos {
+struct PeopleInfos { //TODO: faire des protocol pour le nom, l'adresse, le management
     let firstName:String?
     let lastName:String?
     let dateOfBirthString:String?
@@ -254,8 +192,3 @@ struct Manager:EmployeeManagerType {
     let access: Access = TypeAccess.Employee.Manager.access
     let info: PeopleInfos
 }
-
-
-
-
-

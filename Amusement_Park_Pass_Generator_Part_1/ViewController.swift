@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         laodAllSounds()
         
         do {
-            //let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
+            let guestClassic = try createPass(type: .GuestClassic, infos: PeopleInfos()); people = guestClassic
             //vipGuest = try createPass(type: .GuestVIP, infos: PeopleInfos()); people = vipGuest
             //let freeChildGuest = try createPass(type: .GuestFreeChild, infos: PeopleInfos(birthday: "02.09.2014"));people = freeChildGuest
             //let foodServiceEmployee = try createPass(type: .EmployeeFoodService, infos: PeopleInfos(employeeFirstName: "Armando", lastName: "Qeshua", dateOfBirthString: "22.01.2000", streetAdress: "Route de Chiza", city: "Bengladou", zipCode: 1954, state: "NY", socialSecurityNumber: (12, 134, 1245))); people = foodServiceEmployee
@@ -51,9 +51,7 @@ class ViewController: UIViewController {
         
         if let people = people {
             if AmusementParkArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
-            if AmusementParkArea.checkIfAccessGranted(people).birthDay {
-                print("Happy Birthday!")
-            }
+            //if AmusementParkArea.checkIfAccessGranted(people).birthDay {print("Happy Birthday!")}
             //if RidesArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if RidesControllArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if SkipLineArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
@@ -62,9 +60,8 @@ class ViewController: UIViewController {
             //if OfficeArea.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if FoodDiscountCheck.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
             //if MerchandiseDiscountCheck.checkIfAccessGranted(people).granted{playSound(grantedSound)}else{playSound(deniedSound)}
-        }
-        
-    }
+        } // end of if let people
+    }// end of viewDidLoad
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
